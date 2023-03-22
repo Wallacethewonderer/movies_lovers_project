@@ -41,11 +41,10 @@ body {
 .btn {
     margin-left: 20px;
 }
-
 #display-results {
     border: dotted;
-    height: 70vh;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     padding-top: 20px;
+    flex-direction: column;
 }
