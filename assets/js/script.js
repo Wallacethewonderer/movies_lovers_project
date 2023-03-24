@@ -104,6 +104,6 @@ $(".btn").on("click", function () {
   $('#display-results').empty()
   localStorage.clear();
   let actorName = $(this).siblings("#actor_name").val();
-  // $('h2').append(actorName)
+  $('h2').append(actorName)
   getMovieList(actorName);
 });
