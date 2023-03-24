@@ -19,21 +19,91 @@ var displayMovies = function (movies) {
   $('#display-results').empty()
   for (var i = 0; i < movies.length; i++) {
     const movieTitle = movies[i].title
-    localStorage.setItem(`movieList` + i, movies[i].title)
-
-    $('#display-results').append(`<button id='item${i}'>${movieTitle}</button>`).append("<br>")
-    $(`#item${i}`).on('click', function () {
-      streamingSites(movieTitle)
-    })
+    localStorage.setItem(`movieList` + i, movieTitle)
   }
+  displayTitle(movies, 0)
 };
+
+function displayTitle(list, start) {
+  $('#display-results').empty()
+  $('#back-button').remove()
+  if (!start) {
+		$("#back").css({ visibility: "hidden" }); //since its at 0, the back button stays hidden
+		if (list.length < 10) {
+			// for actor have less then 10 movies to display
+			console.log("len < 10");
+			for (let i = 0; i < list.length; i++) {
+				const movieTitle = list[i].title;
+				displayTitleChild(movieTitle, i); //display
+			}
+		} else {
+			console.log("len > 10"); //actor has more than 10 movies
+			for (var i = 0; i < start + 10; i++) {
+				// console.log(movies[i].title)
+				const movieTitle = list[i].title;
+				displayTitleChild(movieTitle, i); //add button
+
+				$("#back").bind("click", function () {
+					displayTitle(list, start);
+				}); //set the page's back button to display from 0 position
+				$("#next")
+					.unbind("click")
+					.bind("click", function () {
+						displayTitle(list, 10); //set the page's next button to display from 10th position
+					})
+					.css({ visibility: "visible" }); //activate the button
+			}
+		}
+	} else {
+		console.log(start);
+		console.log("10 < len < 10");
+		$("#back").css({ visibility: "visible" }); //activate the button
+		$("#next").css({ visibility: "visible" }); //activate the button
+		for (var i = start; i < start + 10; i++) {
+			// console.log(movies[i].title);
+
+			const movieTitle = list[i].title;
+			displayTitleChild(movieTitle, i); //display from the 10th/20th/30th... position that limited to max 10 titles
+
+			console.log(i, list.length, "test");
+			if (i + 1 >= list.length) {
+				//if the remainning title is less than 10
+				$("#back")
+					.unbind("click")
+					.bind("click", function () {
+						displayTitle(list, start - 10); //set the back button
+					});
+				$("#next").css({ visibility: "hidden" }); // since its at max, deactivate the button
+				return; //terminate
+			}
+		}
+		$("#back")
+			.unbind("click")
+			.bind("click", function () {
+				displayTitle(list, start - 10); //set the button to show the list from -10 position of the starting point
+			});
+		$("#next")
+			.unbind("click")
+			.bind("click", function () {
+				displayTitle(list, start + 10); //set the button to show the list from 10 position of the starting point
+			});
+	}
+}
+
+function displayTitleChild(title, id) {
+  $('#display-results').append(`<button id='item${id}'>${title}</button>`).append("<br>")
+  $(`#item${id}`).on('click', function () {
+    streamingSites(title)
+  })
+}
+
 
 
 var streamingSites = function (movieTitle) {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '5c59cde8dfmshfb3ec99bd8b232ap1f1957jsna702e8da05dc',
+      'X-RapidAPI-Key': '8918c6f44bmsh8ba4a522b87cee8p1a3d22jsn1e2543c34152',
       'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
     }
   };
@@ -52,22 +122,21 @@ var streamingSites = function (movieTitle) {
         const storageLength = localStorage.length;
         const container = $("#display-results");
         container.empty()
+        let movies = []
         for (let k = 0; k < storageLength; k++) {
           let movieName = localStorage.getItem(`movieList${k}`);
-          $("#display-results")
-            .append(`<button id='item${k}'>${movieName}</button>`)
-            .append("<br>");
-          $(`#item${k}`).on('click', function () {
-            streamingSites(movieName)
-          })
+          movies.push({title: movieName})
         }
+        console.log(movies)
+        displayTitle(movies, 0)
       });
     });
   }
 }
 
 function displayStreamingInfo(movie, title) {
-
+  $("#back").css({ visibility: "hidden" }); //hide next/back button since we dont need it anymore
+	$("#next").css({ visibility: "hidden" });
   $('#display-results').empty()
   let result;
   for (let i = 0; i < movie.length; i++) {
@@ -103,7 +172,8 @@ function encode(item) {
 $(".btn").on("click", function () {
   $('#display-results').empty()
   localStorage.clear();
+  $('#current_search').remove()
   let actorName = $(this).siblings("#actor_name").val();
-  $('h2').append(actorName)
+  $('h2').append(`<div id = 'current_search'> ${actorName}</div>`)
   getMovieList(actorName);
 });
