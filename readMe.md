@@ -2,12 +2,11 @@
 
 ![Screenshot](./assets/images/movieProject.png)
 
-link: https://kaylachin90.github.io/workday_schedule/
+link: https://wallacethewonderer.github.io/movies_lovers_project/
 
 ## Description
 
--This challenge is for making a work day scheduling page.
--In this I needed to create a webpage, that loaded my workday schedule.
+-This movie project is intended to have users input their favorite actor and actresses movies. Then by clicking the movie you are able to find where to stream button.
 
 ## Table of Contents (Optional)
 
@@ -20,21 +19,21 @@ If your README is long, add a table of contents to make it easy for users to fin
 
 ## Installation
 
-1. Create a typical workday page and add css
-2. Current day is displayed at the top of the calendar
-3. Each timeblock is color coded to indicate whether it is in the past, present, or future
-4. Can enter an event
-5. click the save button for that timeblock
-6. the text for that event is saved in local storage
+1. Install basic HTML, with an input and submit button tag
+2. Add Styling
+3. In Js make it so that when you enter in name in input and hit submit a list shows up with actor's movies. This will be done with the first API for actors with fetch.
+4. Click on movies and fetch 2nd API for streaming services.
+5. Add back button to go back to original page.
 
 
 ## Usage
 
--Manage my time in a daily calender
+This repository contains the source code for a web application that allows users to search for movies across multiple streaming services, including Netflix, Hulu, Amazon Prime Video, and more. The application uses a combination of APIs and web scraping techniques to provide real-time availability information for each title.
 
 ## Credits
 
-Collab: Corey Yates, my tutor
+Collab: Kayla Chin, Maria Yaslinskiy, Yuhe Liang, Radhika Bandi, Toni Yu
+
 
 ## License
 
@@ -46,4 +45,5 @@ Permissions of this strongest copyleft license are conditioned on making availab
 
 ## Features
 
--Enter in workday and save.
+1. Find all the movies an actor has been in
+2. Find where to stream that movie (if available to stream)
