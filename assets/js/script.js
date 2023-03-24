@@ -33,7 +33,7 @@ var streamingSites = function (movieTitle) {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '5c59cde8dfmshfb3ec99bd8b232ap1f1957jsna702e8da05dc',
+      'X-RapidAPI-Key': '8918c6f44bmsh8ba4a522b87cee8p1a3d22jsn1e2543c34152',
       'X-RapidAPI-Host': 'streaming-availability.p.rapidapi.com'
     }
   };
