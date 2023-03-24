@@ -76,23 +76,24 @@ function displayStreamingInfo(movie, title) {
     }
   }
   if (Object.keys(result.streamingInfo).length === 0) {
-    $('#display-results').append('<div>RIP</div>')
+    $('#display-results').append('<div>No Streaming at this time</div>')
   } else {
     for (item in result.streamingInfo.us) {
       let stuff = result.streamingInfo.us[item]
       for (let i = 0; i < stuff.length; i++) {
         console.log(item, stuff[i].link, stuff[i].type, 'stuff we need')
-        showStreamingChannel(item, stuff[i].link, stuff[i].type)
+        
       }
+      showStreamingChannel(item, stuff[0].link, stuff[0].type)
     }
 
   }
 }
 
 function showStreamingChannel(page, link, style) {
-  $('#display-results').append(`<div>At ${page}</div>`)
-  $('#display-results').append(`<div>watch it by ${style}</div>`)
-  $('#display-results').append(`<div>at this ${link} <==</div>`).append('<br>')
+  $('#display-results').append(`<div id='page'>You can find it at: ${page}</div>`)
+  $('#display-results').append(`<div id='style'>watch it by: ${style}</div>`)
+  // $('#display-results').append(`<div>at this ${link} <==</div>`).append('<br>')
 }
 
 function encode(item) {
@@ -103,5 +104,6 @@ $(".btn").on("click", function () {
   $('#display-results').empty()
   localStorage.clear();
   let actorName = $(this).siblings("#actor_name").val();
+  // $('h2').append(actorName)
   getMovieList(actorName);
 });

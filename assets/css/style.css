@@ -13,20 +13,44 @@ body {
 
 .header {
     background-image: url(../images/movie.jpg);
+    background-position: center;
     height: 250px;
     display: block;
+    background-color:gray;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     padding-left: 200px;
     padding-top: 100px;
     color:white
+    font-size: 20px;
+   
+    
     
 }
 
+h2 {
+    display: flex;
+    justify-content: center;
+}
+
 .header-movie {
-    padding-left: 100px;
-    font-size: 30px;
+  padding-right: 20px; 
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    color:white;
+}
+
+.header-movieTwo {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    color:white;
+    padding-top: 60px;
+    padding-right: 45px;
 }
 
 .input {
@@ -47,4 +71,28 @@ body {
     justify-content: space-between;
     padding-top: 20px;
     flex-direction: column;
+    margin: 20px;
+}
+
+#back-button {
+    background-color: yellow;
+    height: 50px;
+    width: 80px;
+    border-radius: 10px;
+   margin-top: 30px;
+   margin-left: 20px;
+}
+
+#page {
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+#style {
+    font-size: 25px;
+}
+
+#display-results div {
+    display: flex;
+    justify-content: center;
 }
